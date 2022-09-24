@@ -1,0 +1,10 @@
+.loader_section{
+    height: 80vh;
+    align-items: center;
+}
+.spinner-border{
+    color: #0d6efd;
+}
+.col-md-4 .thumbnail-img{
+    height: -webkit-fill-available!important;
+}

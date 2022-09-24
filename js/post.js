@@ -34,29 +34,53 @@ const displayCatname = (catName) =>{
 };
 
 function loadCat(cat_id){
+    // Start Loader
+    toggleSpinner(true);
+
     const cat_url = `https://openapi.programming-hero.com/api/news/category/${cat_id}`;
     // console.log(cat_url);
     fetch(cat_url)
         .then(response => response.json())
         .then(data => displayPosts(data));
 }
+const toggleSpinner = isLoading =>{
+    const loaderSection = document.getElementById("loader")
+    if(isLoading){
+        loaderSection.classList.remove('d-none');
+    }
+    else{
+        loaderSection.classList.add('d-none');
+    }
+}
+
 const displayPosts = (catN) =>{
     // console.log(catN.data)
     const posts = catN.data;
 
     const li_list  = document.getElementById('displayCat');
     li_list.innerHTML ="";
+    toggleSpinner(false);
 
+    const noPost = document.getElementById('post-not-found')
+    if(posts.length ===0){
+        noPost.classList.remove('d-none');
+    }
+    else{
+        noPost.classList.add('d-none');
+
+        const post_count = document.createElement("div");
+        post_count.innerHTML =`<div class="p-3 my-5 bg-info text-dark">${posts.length} items found</div>`;
+        li_list.appendChild(post_count);
+    }
     for (const post of posts)
     {
         // console.log(post.title);
         const li_items = document.createElement("div");
-
         li_items.innerHTML =`
             <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="${post.thumbnail_url}" class="img-fluid rounded-start" alt="...">
+                        <img src="${post.thumbnail_url}" class="img-fluid rounded-start thumbnail-img" alt="...">
                     </div>
                     <div class="col-md-8">
                     <div class="card-body">
@@ -111,5 +135,6 @@ const displayPosts = (catN) =>{
         `;
         li_list.appendChild(li_items);
     }
+    
 };   
 loadCatName();
