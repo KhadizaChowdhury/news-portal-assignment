@@ -1,38 +1,3 @@
-function loadCatName(){
-    fetch('https://openapi.programming-hero.com/api/news/categories')
-        .then(response => response.json())
-        .then(data => displayCatname(data));
-}
-
-// const displayCatname = (catName) =>{
-//     const categories = catName.data.news_category;
-
-//     for (const category of categories)
-//     {
-//         console.log(category.category_name)
-//     }
-// };
-
-const displayCatname = (catName) =>{
-    const categories = catName.data.news_category;
-
-    const li_list  = document.getElementById('categoryName');
-    li_list.innerHTML ="";
-
-    for (const category of categories)
-    {
-        const cat_url = 'https://openapi.programming-hero.com/api/news/category';
-        const li_items = document.createElement("li");
-
-        li_items.innerHTML =`
-        <li class="nav-item">
-            <a class="nav-link" aria-current="page" onclick="loadCat('${category.category_id}')">${category.category_name}</a>
-        </li>
-        `;
-        li_list.appendChild(li_items);
-    }
-};
-
 function loadCat(cat_id){
     // Start Loader
     toggleSpinner(true);
@@ -41,7 +6,8 @@ function loadCat(cat_id){
     // console.log(cat_url);
     fetch(cat_url)
         .then(response => response.json())
-        .then(data => displayPosts(data));
+        .then(data => displayPosts(data))
+        .catch(error => console.error(error));
 }
 const toggleSpinner = isLoading =>{
     const loaderSection = document.getElementById("loader")
@@ -113,15 +79,15 @@ const displayPosts = (catN) =>{
                                     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-fullscreen-md-down">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <div>
-                                                    <h6 class="modal-title" id="postDetailsLabel">Title</h6>
-                                                    <p id="postAuthor" class="author">Author: </p>
-                                                    <span id="view">View</span>
-                                                </div>
+                                                <p class="modal-title" id="postDetailsLabel">Title</p>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
-                                                Body
+                                            <div class="author-details">
+                                                <p id="postAuthor" class="author">Author: </p>
+                                                <span id="view">View</span>
+                                            </div>
+                                            <div id="modal-body" class="modal-body">
+                                                <p></p>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -147,7 +113,8 @@ const postDetails = (post_id) =>{
     // console.log(news_url);
     fetch(news_url)
         .then(response => response.json())
-        .then(data => newsDetails(data));
+        .then(data => newsDetails(data))
+        .catch(error => console.error(error));
 }
 
 const newsDetails = (post) =>{
@@ -157,13 +124,23 @@ const newsDetails = (post) =>{
     // post.innerHTML ="";
     toggleSpinner(false);
     const postLabel  = document.getElementById('postDetailsLabel');
-    postLabel.innerHTML = newsDetails.title;
+    postLabel.innerHTML = `<h6>${newsDetails.title}</h6>
+    <p>Published: ${newsDetails.author.published_date ? newsDetails.author.published_date : 'No published Date Found </p>'}
+    `;
 
     const postAuthor  = document.getElementById('postAuthor');
-    postAuthor.innerHTML = `Author: ${newsDetails.author.name ? newsDetails.author.name : `Author not Found`}`;
+    postAuthor.innerHTML = `Author: ${newsDetails.author.name ? newsDetails.author.name : 'Author not Found'}`;
 
     const view  = document.getElementById('view');
-    view.innerHTML = `Total View: ${newsDetails.total_view ? newsDetails.total_view : `No release Date Found`}`;
-};
+    view.innerHTML = `Total View: ${newsDetails.total_view ? newsDetails.total_view : 'No release Date Found'}`;
 
-loadCatName();
+    const body  = document.getElementById('modal-body');
+    body.innerHTML = `Others_info:
+        <br><p class="p-2 my-1 bg-info text-dark">Is_trending: ${newsDetails.others_info ? newsDetails.others_info.is_trending
+            : 'Not Found</p>'}
+            <div>
+            Details: ${newsDetails.details ? newsDetails.details
+                : 'Not Found'}
+            </div>`;
+};
+loadCat('08');

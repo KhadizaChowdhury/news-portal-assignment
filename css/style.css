@@ -8,10 +8,18 @@
 .col-md-4 .thumbnail-img{
     height: -webkit-fill-available!important;
 }
+.modal-content p{
+    margin: 0;
+}
 .modal-header {
     align-items: baseline;
 }
-.author{
-    margin-top: 6px;
-    margin-bottom: 0;
+.author-details{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 16px;
+    border-bottom: 1px solid #dee2e6;
+}
+#modal-body p{
+    margin-left: 16px;
 }
