@@ -69,7 +69,7 @@ const displayPosts = (catN) =>{
         noPost.classList.add('d-none');
 
         const post_count = document.createElement("div");
-        post_count.innerHTML =`<div class="p-3 my-5 bg-info text-dark">${posts.length} items found</div>`;
+        post_count.innerHTML =`<div class="p-3 my-5 bg-info text-dark">${posts.length} posts found</div>`;
         li_list.appendChild(post_count);
     }
     for (const post of posts)
@@ -102,29 +102,33 @@ const displayPosts = (catN) =>{
                                 <p class="card-text"><small class="text-muted">View: ${post.total_view}</small></p>
                             </div>
                             <div class="col-auto">
+
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                              Launch demo modal
+                            <button type="button" onclick="postDetails('${post._id}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#postDetails">
+                                See Details
                             </button>
                             
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <div class="modal-dialog modal-dialog-centered modal-fullscreen-md-down">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body">
-                                    ...
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                  </div>
+                                <div class="modal fade" id="postDetails" tabindex="-1" aria-labelledby="postDetailsLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-fullscreen-md-down">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div>
+                                                    <h6 class="modal-title" id="postDetailsLabel">Title</h6>
+                                                    <p id="postAuthor" class="author">Author: </p>
+                                                    <span id="view">View</span>
+                                                </div>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Body
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
-                            </div>
                             <!-- Modal End -->
                             </div>
                         </div>
@@ -136,5 +140,30 @@ const displayPosts = (catN) =>{
         li_list.appendChild(li_items);
     }
     
-};   
+};
+
+const postDetails = (post_id) =>{
+    const news_url = `https://openapi.programming-hero.com/api/news/${post_id}`;
+    // console.log(news_url);
+    fetch(news_url)
+        .then(response => response.json())
+        .then(data => newsDetails(data));
+}
+
+const newsDetails = (post) =>{
+    console.log(post.data[0])
+    const news  = document.getElementById('postDetails');
+    const newsDetails = post.data[0];
+    // post.innerHTML ="";
+    toggleSpinner(false);
+    const postLabel  = document.getElementById('postDetailsLabel');
+    postLabel.innerHTML = newsDetails.title;
+
+    const postAuthor  = document.getElementById('postAuthor');
+    postAuthor.innerHTML = `Author: ${newsDetails.author.name ? newsDetails.author.name : `Author not Found`}`;
+
+    const view  = document.getElementById('view');
+    view.innerHTML = `Total View: ${newsDetails.total_view ? newsDetails.total_view : `No release Date Found`}`;
+};
+
 loadCatName();

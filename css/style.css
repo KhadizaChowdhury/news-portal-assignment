@@ -8,3 +8,10 @@
 .col-md-4 .thumbnail-img{
     height: -webkit-fill-available!important;
 }
+.modal-header {
+    align-items: baseline;
+}
+.author{
+    margin-top: 6px;
+    margin-bottom: 0;
+}
