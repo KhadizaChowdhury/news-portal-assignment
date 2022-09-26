@@ -40,6 +40,7 @@ const displayPosts = (catN) =>{
     // if    if(posts.length < 0){}
     if(posts.length === 0){
         noPost.classList.remove('d-none');
+        document.getElementById('page-content').classList.add('d-none');
     }
     else{
         noPost.classList.add('d-none');
