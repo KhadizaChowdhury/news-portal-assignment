@@ -88,17 +88,18 @@ const displayPosts = (catN) =>{
                             
                             <!-- Modal -->
                                 <div class="modal fade" id="postDetails" tabindex="-1" aria-labelledby="postDetailsLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-fullscreen-md-down">
+                                    <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered modal-fullscreen-md-down">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <p class="modal-title" id="postDetailsLabel">Title</p>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="author-details text-bg-light">
+                                            <div class="author-details text-bg-light align-items-center">
                                                 <p id="postAuthor" class="author">Author: </p>
                                                 <span id="view">View</span>
+                                                <span id="info">Info</span>
                                             </div>
-                                            <div id="modal-body" class="modal-body">
+                                            <div id="modal-body" class="modal-body mt-2">
                                                 <p></p>
                                             </div>
                                             <div class="modal-footer">
@@ -135,23 +136,26 @@ const newsDetails = (post) =>{
     // post.innerHTML ="";
     toggleSpinner(false);
     const postLabel  = document.getElementById('postDetailsLabel');
-    postLabel.innerHTML = `<h6>${newsDetails.title}</h6>
+    postLabel.innerHTML = `<h4>${newsDetails.title}</h4>
     <p>Published: ${newsDetails.author.published_date ? newsDetails.author.published_date : 'No published Date Found </p>'}
     `;
 
     const postAuthor  = document.getElementById('postAuthor');
     postAuthor.innerHTML = `Author: ${newsDetails.author.name ? newsDetails.author.name : 'Author not Found'}`;
 
+    const info  = document.getElementById('info');
+    info.innerHTML = `Others_info:
+    <br><p class="p-1 my-1 bg-info text-dark">Is_trending: ${newsDetails.others_info ? newsDetails.others_info.is_trending
+        : 'Not Found</p>'}`;
+            
     const view  = document.getElementById('view');
-    view.innerHTML = `Total View: ${newsDetails.total_view ? newsDetails.total_view : 'No release Date Found'}`;
+    view.innerHTML = `<i class="fa-regular fa-eye"> ${newsDetails.total_view ? newsDetails.total_view : 'No release Date Found'}`;
 
     const body  = document.getElementById('modal-body');
-    body.innerHTML = `Others_info:
-        <br><p class="p-2 my-1 bg-info text-dark">Is_trending: ${newsDetails.others_info ? newsDetails.others_info.is_trending
-            : 'Not Found</p>'}
-            <div class="m-3 ms-0">
-            Details: ${newsDetails.details ? newsDetails.details
-                : 'Not Found'}
-            </div>`;
+    body.innerHTML = `
+        <img src="${newsDetails.thumbnail_url ? newsDetails.thumbnail_url: 'No Image Found'}" class="me-3 rounded modal-img" alt="...">
+        <div class="mt-4">
+        Details: ${newsDetails.details ? newsDetails.details
+                : 'Not Found'}</div>`;
 };
 loadCat('08');

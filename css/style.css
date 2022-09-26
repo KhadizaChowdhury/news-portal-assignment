@@ -36,6 +36,14 @@ body{
 .modal-header {
     align-items: baseline;
 }
+.modal-img{
+    width: 100%;
+    object-fit: contain;
+    height: 250px;
+}
+.author-details #view, .author-details #info{
+    font-size: 14px;
+}
 .author-details{
     display: flex;
     justify-content: space-between;
@@ -72,6 +80,10 @@ body{
     }
     .col-md-4 .thumbnail-img {
         margin-right: 0px!important;
+    }
+    .author-img {
+        width: 60px;
+        margin-bottom: 7px;
     }
 }
 @media (max-width: 425px) {

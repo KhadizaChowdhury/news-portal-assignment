@@ -9,73 +9,89 @@
   </head>
   <body>
     <header>
-        <nav class="navbar navbar-expand-lg py-3">
-            <div class="container">
-              <button class=" btn btn-primary text-white" href="/index.html">Today's News</button>
+      <nav class="navbar navbar-expand-lg py-3">
+          <div class="container">
+            <button class=" btn btn-primary text-white" href="/index.html">Today's News</button>
 
-              <div>
-                <button class="btn offcanvas-btn d-lg-none my-2 m-sm-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
-                  Categories
-                </button>
-  
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
+            <div>
+              <button class="btn offcanvas-btn d-lg-none my-2 m-sm-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
+                Categories
+              </button>
+
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link active text-primary" aria-current="page" href="/index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" onclick="loadCat('08')">News</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/blog.html">Blog</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+      </nav>
+      <div class="container">
+          <div class="text-success">
+              <hr class="m-0">
+          </div>
+          
+          <div class="offcanvas-lg offcanvas-end" tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasResponsiveLabel">All Categories</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" aria-label="Close"></button>
               </div>
-              <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a class="nav-link active text-primary" aria-current="page" href="/index.html">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" onclick="loadCat('08')">News</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/blog.html">Blog</a>
-                  </li>
-                </ul>
+              <div class="offcanvas-body">
+                <nav class="navbar navbar-expand-lg pt-2">
+                  <div>
+                      <ul class="navbar-nav">
+                        <li class="nav-item">
+                          <a class="nav-link active" onclick="loadCat('08')" aria-current="page" href="#">Home</a>
+                        </li>
+    
+                        <div id="categoryName" class="navbar-nav">
+    
+                        </div>
+                      </ul>
+                  </div>
+                </nav>
               </div>
-            </div>
-        </nav>
-        <div class="container">
-            <div class="text-success">
-                <hr class="m-0">
-            </div>
-            
-            <div class="offcanvas-lg offcanvas-end" tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
-                <div class="offcanvas-header">
-                  <h5 class="offcanvas-title" id="offcanvasResponsiveLabel">All Categories</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                  <nav class="navbar navbar-expand-lg pt-2">
-                    <div>
-                        <ul class="navbar-nav">
-                          <li class="nav-item">
-                            <a class="nav-link active" onclick="loadCat('08')" aria-current="page" href="#">Home</a>
-                          </li>
-      
-                          <div id="categoryName" class="navbar-nav">
-      
-                          </div>
-                        </ul>
-                    </div>
-                  </nav>
-                </div>
-            </div>
-        </div>
-      </header>
+          </div>
+      </div>
+    </header>
     <section class="container">
       <div class="accordion my-5" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingOne">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Accordion Item #1
+              What are the difference between var, let and const?
             </button>
           </h2>
           <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+              <strong>All three variables differ in the following cases:</strong>
+              <br><br>
+              <b>1. Assignment</b>
+              <ul>
+                <li>let and var can be reassigned to a new value while const cannot be reassigned.</li>
+              </ul>
+              <b>2. Scope</b>
+              <ul>
+                <li>var is function-scoped.</li>
+                <li>let and const are block-scoped(any code within {} braces).</li>
+                <li>Here is an article on Understanding Scope in Javascript.</li>
+              </ul>
+              <b>3.Hoisting</b>
+              <ul>
+                <li>let and const is also hoisted but will throw an error if the variable is used before the declaration. It is a little complicated and we will discuss it in a separate article dedicated to this specific topic.</li>
+                <li>var is always hoisted to the top of their respective scope.</li>
+              </ul>
             </div>
           </div>
         </div>
