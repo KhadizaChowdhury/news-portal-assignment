@@ -1,3 +1,12 @@
+body{
+    background: #F6F6F6;
+
+}
+.offcanvas-btn{
+    border: 1px solid #0b5ed7;
+    background: transparent;
+    color: #0b5ed7;
+}
 .loader_section{
     height: 80vh;
     align-items: center;
@@ -6,7 +15,20 @@
     color: #0d6efd;
 }
 .col-md-4 .thumbnail-img{
-    height: -webkit-fill-available!important;
+    width: -webkit-fill-available;
+    height: 350px;
+    object-fit: cover;
+}
+.author-img{
+    width: 100px;
+}
+.author-mame{
+    color: #2B2C34;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
 }
 .modal-content p{
     margin: 0;
@@ -17,9 +39,43 @@
 .author-details{
     display: flex;
     justify-content: space-between;
-    padding: 5px 16px;
+    padding: 10px 16px;
     border-bottom: 1px solid #dee2e6;
+}
+.view{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
 }
 #modal-body p{
     margin-left: 16px;
+    display: inline-block;
+}
+@media (max-width: 991.98px) {
+    .author-img{
+        width: 75px;
+    }
+    .see-details{
+        font-size: 14px;
+    }
+}
+@media (max-width: 767.98px) {
+    #displayCat .card-body {
+        padding-left: 0px;
+        padding-right: 0;
+        margin-top: 10px;
+    }
+    .others-info{
+        width: 100%;
+    }
+    .col-md-4 .thumbnail-img {
+        margin-right: 0px!important;
+    }
+}
+@media (max-width: 425px) {
+    .col-md-4 .thumbnail-img {
+        height: 280px;
+    }
 }

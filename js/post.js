@@ -26,51 +26,63 @@ const displayPosts = (catN) =>{
     const li_list  = document.getElementById('displayCat');
     li_list.innerHTML ="";
     toggleSpinner(false);
+    // const showAllPosts = document.getElementById('show_all');
+    // if(posts.length > 5){
+    //     const postShow = posts.slice(0,5);
+    //     showAllPosts.classList.remove('d-none');
+    // }
+    // else{
+    //     const postShow = posts;
+    //     showAllPosts.classList.add('d-none');
+    // }
 
-    const noPost = document.getElementById('post-not-found')
-    if(posts.length ===0){
+    const noPost = document.getElementById('post-not-found');
+    // if    if(posts.length < 0){}
+    if(posts.length === 0){
         noPost.classList.remove('d-none');
     }
     else{
         noPost.classList.add('d-none');
 
         const post_count = document.createElement("div");
-        post_count.innerHTML =`<div class="p-3 my-5 bg-info text-dark">${posts.length} posts found</div>`;
+        post_count.innerHTML =`<div class="p-3 my-5 bg-white fw-semibold text-dark">${posts.length} posts found</div>`;
         li_list.appendChild(post_count);
     }
+    // const postShow = posts.slice(0,5);
+
     for (const post of posts)
     {
         // console.log(post.title);
         const li_items = document.createElement("div");
         li_items.innerHTML =`
-            <div class="card mb-3">
+            <div class="card mb-4 p-3 border border-0">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="${post.thumbnail_url}" class="img-fluid rounded-start thumbnail-img" alt="...">
+                        <img src="${post.thumbnail_url}" class="me-3 rounded thumbnail-img" alt="...">
                     </div>
                     <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">${post.title}</h5>
-                        <p class="card-text">${post.details}</p>
+                        <p class="card-text">${post.details.length > 500 ? post.details.slice(0, 500) + ' ...' : post.details}</p>
                         <div class="row gy-2 gx-3 align-items-center justify-content-between">
-                            <div class="col-auto">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="${post.author.img}" class="img-fluid rounded-circle" style="width: 100px;" alt="...">
+                            <div class="col-auto others-info">
+                                <div class="row g-0 align-items-center">
+                                    <div class="col-md-4 pe-2">
+                                        <img src="${post.author.img}" class="img-fluid rounded-circle author-img" alt="...">
                                     </div>
                                     <div class="col-md-8">
-                                        <p class="card-text"><small class="text-muted">${post.author.name} </small></p>
+                                        <p class="card-text m-0"><small class="author-mame">${post.author.name} </small></p>
                                         <p class="card-text"><small class="text-muted">${post.author.published_date}</small></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <p class="card-text"><small class="text-muted">View: ${post.total_view}</small></p>
+                                <p class="card-text"><i class="fa-regular fa-eye"></i><small class="view"> ${post.total_view}</small></p>
                             </div>
                             <div class="col-auto">
 
                             <!-- Button trigger modal -->
-                            <button type="button" onclick="postDetails('${post._id}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#postDetails">
+                            <button type="button" onclick="postDetails('${post._id}')" class="btn btn-primary see-details" data-bs-toggle="modal" data-bs-target="#postDetails">
                                 See Details
                             </button>
                             
@@ -82,7 +94,7 @@ const displayPosts = (catN) =>{
                                                 <p class="modal-title" id="postDetailsLabel">Title</p>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="author-details">
+                                            <div class="author-details text-bg-light">
                                                 <p id="postAuthor" class="author">Author: </p>
                                                 <span id="view">View</span>
                                             </div>
@@ -105,7 +117,6 @@ const displayPosts = (catN) =>{
         `;
         li_list.appendChild(li_items);
     }
-    
 };
 
 const postDetails = (post_id) =>{
@@ -138,7 +149,7 @@ const newsDetails = (post) =>{
     body.innerHTML = `Others_info:
         <br><p class="p-2 my-1 bg-info text-dark">Is_trending: ${newsDetails.others_info ? newsDetails.others_info.is_trending
             : 'Not Found</p>'}
-            <div>
+            <div class="m-3 ms-0">
             Details: ${newsDetails.details ? newsDetails.details
                 : 'Not Found'}
             </div>`;
