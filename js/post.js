@@ -44,7 +44,8 @@ const displayPosts = (catN) =>{
     }
     else{
         noPost.classList.add('d-none');
-
+        document.getElementById('page-content').classList.add('d-none');
+        
         const post_count = document.createElement("div");
         post_count.innerHTML =`<div class="p-3 my-5 bg-white fw-semibold text-dark">${posts.length} posts found</div>`;
         li_list.appendChild(post_count);
