@@ -59,8 +59,23 @@
           </div>
       </div>
     </header>
-    <section class="container">
-      <div class="accordion my-5" id="accordionExample">
+    <section>
+      <!-- Loader Starts -->
+        <div id="loader" class="d-none loader_section d-flex justify-content-center aligm-items-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      <!-- Loader End -->
+
+      <div id="displayCat" class="container">
+        
+      </div>
+
+      <div id="post-not-found" class="d-none mt-5 container">
+        <div class="p-3 mb-2 bg-warning text-dark">No posts Found</div>
+      </div>
+      <div class="container accordion my-5" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingOne">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -128,6 +143,7 @@
       </div>
     </section>
     <script src="js/cat.js"></script>
+    <script src="js/post.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

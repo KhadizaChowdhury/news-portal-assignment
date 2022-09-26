@@ -158,4 +158,3 @@ const newsDetails = (post) =>{
         Details: ${newsDetails.details ? newsDetails.details
                 : 'Not Found'}</div>`;
 };
-loadCat('08');
